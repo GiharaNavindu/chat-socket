@@ -10,7 +10,9 @@ import java.util.Scanner; // Import for reading user input
 public class ClientChat {
 
     static String host = "localhost"; // Define the server address (localhost for local testing)
-    static int port = 7999;           // Define the port number for the server
+    static int port = 7999; // Define the port number for the server
+
+    // change the port as wished
 
     public static void main(String[] args) throws IOException { // Main method
         System.out.println("\t\tSimple Socket Client"); // Print client title
@@ -21,8 +23,12 @@ public class ClientChat {
         System.out.println("Server is connected\n\n"); // Notify that the client is connected to the server
 
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Create input stream to read messages from the server
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true); // Create output stream to send messages to the server
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Create input
+                                                                                                    // stream to read
+                                                                                                    // messages from the
+                                                                                                    // server
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true); // Create output stream to send messages
+                                                                               // to the server
             Scanner scannerInput = new Scanner(System.in); // Create a scanner for user input
             String messageFromServer = in.readLine(); // Read welcome message from the server
 
