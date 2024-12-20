@@ -1,39 +1,34 @@
-package MessageApp; // Package declaration
+package MessageApp;
 
-import java.io.BufferedReader; // Import for reading input
-import java.io.IOException; // Import for handling IO exceptions
-import java.io.InputStreamReader; // Import for converting byte streams to character streams
-import java.io.PrintWriter; // Import for writing output
-import java.net.Socket; // Import for client socket
-import java.util.Scanner; // Import for reading user input
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
 
 public class ClientChat {
 
     static String host = "localhost"; // Define the server address (localhost for local testing)
-    static int port = 7999; // Define the port number for the server
+    static int port = 7999;
 
     // change the port as wished
 
-    public static void main(String[] args) throws IOException { // Main method
-        System.out.println("\t\tSimple Socket Client"); // Print client title
-        System.out.println("\t\t======================="); // Print separator
+    public static void main(String[] args) throws IOException {
+        System.out.println("\t\tSimple Socket Client");
+        System.out.println("\t\t=======================");
 
         // Connect to the server
-        Socket socket = new Socket(host, port); // Create a socket to connect to the server
-        System.out.println("Server is connected\n\n"); // Notify that the client is connected to the server
+        Socket socket = new Socket(host, port);
+        System.out.println("Server is connected\n\n");
 
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Create input
-                                                                                                    // stream to read
-                                                                                                    // messages from the
-                                                                                                    // server
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true); // Create output stream to send messages
-                                                                               // to the server
-            Scanner scannerInput = new Scanner(System.in); // Create a scanner for user input
-            String messageFromServer = in.readLine(); // Read welcome message from the server
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            Scanner scannerInput = new Scanner(System.in);
+            String messageFromServer = in.readLine();
 
-            // Display the message from the server
-            System.out.println("Message from Server: " + messageFromServer); // Print the welcome message
+            System.out.println("Message from Server: " + messageFromServer);
 
             // Chat loop
             String clientInput; // Variable to hold client input
