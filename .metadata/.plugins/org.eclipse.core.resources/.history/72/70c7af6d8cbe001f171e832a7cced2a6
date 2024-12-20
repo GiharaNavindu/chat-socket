@@ -1,0 +1,62 @@
+package MessageApp;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class ServerChat {
+
+    static int port = 9999;
+
+    public static void main(String[] args) throws IOException {
+        System.out.println("\t\tSimple Socket Server");
+        System.out.println("\t\t======================");
+
+        ServerSocket serversocket = new ServerSocket(port);
+        Scanner scannerInput = new Scanner(System.in);
+        String input, output;
+
+        try {
+            while (true) { // never-ending loop
+                Socket socket = serversocket.accept();
+                System.out.println("Client is connected....\n\n");
+
+                try {
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+                    try {
+                        out.println("Welcome to the chat App");
+
+                        while (true) {
+                            input = in.readLine();
+                            if (input == null || input.equalsIgnoreCase("exit")) {
+                                System.out.println("Client has disconnected.");
+                                break;
+                            }
+                            System.out.println("Client Says: " + input);
+
+                            // The reply
+                            System.out.print("Server: ");
+                            output = scannerInput.nextLine(); // reading from the console
+                            out.println(output);
+                        }
+                    } finally {
+                        socket.close();
+                        out.close();
+                        in.close();
+                    }
+
+                } finally {
+                    socket.close(); // socket is closed after sending the message to the client side
+                }
+            }
+        } finally {
+            serversocket.close();
+        }
+    }
+}
