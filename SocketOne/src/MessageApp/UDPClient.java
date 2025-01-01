@@ -15,7 +15,7 @@ public class UDPClient {
 
         DatagramPacket pac = new DatagramPacket(buf, buf.length, ipAddress, 8888);
 
-        clinet.send(pac);
+        client.send(pac);
 
         client.close();
 
