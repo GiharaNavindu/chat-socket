@@ -8,14 +8,19 @@ public class UDPServer {
 
 
 
-        String str = "Hello WOrld";
-        byte[]buf = str.getBytes();// get the string and converts to byte array
+
+        byte[] buf = new byte[256];
 
 
 
-        DatagramPacket pac = new DatagramPacket(buf, buf.length, ipAddress, 8888);
+        DatagramPacket pac = new DatagramPacket(buf, buf.length);
 
-        server.send(pac);
+        //reading data from client
+
+        server.recieve(pac);
+
+        String response = new String(packet.getData());
+        System.out.println("Recieved: " + response);
 
         server.close();
 
