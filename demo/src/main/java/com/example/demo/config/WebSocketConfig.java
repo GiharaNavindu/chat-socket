@@ -14,13 +14,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");//prefix for whare the msgs wil be broadcasted
+        config.enableSimpleBroker("/topic");//prefix for whare the msgs wil be broadcasted(FOr broadcasting)
         //for multiple channels- /channels/cricket and /topic/hockey
-        config.setApplicationDestinationPrefixes("/app");//prefix for endpoint url
+        config.setApplicationDestinationPrefixes("/app");//prefix for endpoint url(for client to get the msg from the endpoint)
+        //for multiple /app/<url>
     }
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        WebSocketMessageBrokerConfigurer.super.registerStompEndpoints(registry);
+    public void registerStompEndpoints(StompEndpointRegistry registry) {//all the stomp endpoints configurations
+        registry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS();//defines the web socket endpoints that client use to establish the connection
     }
 }
